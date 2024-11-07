@@ -1,52 +1,89 @@
 import React, { useState } from "react";
-import { Container, Form, Button } from 'react-bootstrap';
-import { login } from '../services/authService';
-import { useNavigate } from 'react-router-dom';
+import { Container, Form, Button, Dropdown } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    setError('');
 
-    if(login(username,password)){
-      navigate('/dashboard');
-    }
-    else{
-      setError('Invalid username or password');
+    if (
+      username === "admin" &&
+      password === "password123" &&
+      role === "Admin"
+    ) {
+      navigate("/admindashboard");
+    } else if (
+      username === "student" &&
+      password === "password123" &&
+      role === "Student"
+    ) {
+      navigate("/studentdashboard");
+    } else if (
+      username === "teacher" &&
+      password === "password123" &&
+      role === "Teacher"
+    ) {
+      navigate("/teacherdashboard");
+    } else {
+      alert("Invalid credentials or role. Please try again.");
     }
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
-      <Form className="p-4 border rounded shadow-sm" style={{width: '300px' }}>
-        <h2 className="mb-4 text-center">Login</h2>
-        {error && <Alert variant="danger">{error}</Alert>} 
-        <Form.Group className="mb-3" controlId="formUsername">
-          <Form.Label>Username</Form.Label>
-          <Form.Control 
-            type="text" 
-            placeholder="Enter username"
+    <div className="container mt-5">
+      <h2 className="text-center">Login</h2>
+      <form onSubmit={handleLogin}>
+        <div className="mb-3">
+          <label htmlFor="username" className="form-label">
+            Username
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="username"
             value={username}
-            onChange={{e} => setUsername(e.target.value)} />
-        </Form.Group> 
-        <Form.Group className="mb-3" controlId="formPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control 
-            type="password" 
-            placeholder="Password"
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
+            Password
+          </label>
+          <input
+            type="password"
+            className="form-control"
+            id="password"
             value={password}
-            onChange={{e} => setPassword(e.target.value)} />
-        </Form.Group>
-        <Button variant="primary" type="submit" className="w-100">
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="role" className="form-label">Role</label>
+          <select
+            id="role"
+            className="form-select"
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            required
+          >
+            <option value="">Select Role</option>
+            <option value="Admin">Admin</option>
+            <option value="Student">Student</option>
+            <option value="Teacher">Teacher</option>
+          </select>
+        </div>
+        <button type="submit" className="btn btn-primary">
           Login
-        </Button>
-      </Form>
-    </Container>
+        </button>
+      </form>
+    </div>
   );
 };
 

@@ -2,3 +2,32 @@
   font-family: sans-serif;
   text-align: center;
 }
+
+.navbar-brand img {
+  margin-right: 10px;
+}
+
+.container {
+  max-width: 960px;
+  margin-top: 20px;
+}
+
+.jumbotron {
+  padding: 2rem;
+  background-color: #e9ecef;
+  border-radius: 0.3rem;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}
+
+.text-center {
+  margin-top: 2rem;
+}
