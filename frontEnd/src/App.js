@@ -8,6 +8,7 @@ import Welcome from "./components/Welcome";
 import AdminDashboard from "./pages/AdminDashboard";
 import StudentDashboard from "./pages/StudentDashboard";
 import TeacherDashboard from "./pages/TeacherDashboard";
+import AddFaculty from "./pages/AddFaculty";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/admindashboard" element={<AdminDashboard />} />
         <Route path="/studentdashboard" element={<StudentDashboard />} />
         <Route path="/teacherdashboard" element={<TeacherDashboard />} />
+        <Route path="/add-faculty" element={<AddFaculty />} />
       </Routes>
     </Router>
   );
